@@ -1,31 +1,44 @@
 # Financial Max 🐉💰
 
-Standalone Flutter personal-finance app foundation.
+A standalone, installable personal-finance PWA. No Flutter, no APK build pipeline, no GitHub Actions, and no backend is required for the basic app.
 
-## Important: GitHub is the code repository
-Opening the repository does **not** show the running app. GitHub stores the source code.
-The included GitHub Actions workflow builds an Android APK for you.
+## Easiest setup
 
-## Build the APK on GitHub (phone-friendly)
+1. Create/open your GitHub repository.
+2. Upload the **contents** of this folder to the repository root:
+   - `index.html`
+   - `style.css`
+   - `app.js`
+   - `manifest.json`
+   - `sw.js`
+   - `icons/`
+3. Commit to the `main` branch.
+4. Enable **GitHub Pages**:
+   - Repository → Settings → Pages
+   - Source: **Deploy from a branch**
+   - Branch: **main**
+   - Folder: **/ (root)**
+   - Save
+5. Open the Pages URL GitHub gives you.
+6. In Chrome on Android, use the browser menu and choose **Install app** or **Add to Home screen**.
 
-1. Upload/commit this whole project to your GitHub repository.
-2. Open the repository's **Actions** tab.
-3. Select **Build Financial Max APK**.
-4. Tap **Run workflow** (or push a commit to `main` to trigger it automatically).
-5. Wait for the workflow to finish.
-6. Open the completed workflow run.
-7. Under **Artifacts**, download `financial-max-apk`.
-8. Extract it and install `app-release.apk` on Android.
+## Important
 
-## Current foundation
-- Financial Max dark dashboard
-- Income and expense entry
-- Local persistence on the device
-- Balance, cash-flow and basic net-worth calculations
-- XP and financial levels
-- Navigation foundation for Income, Expenses, Goals and Growth
+Financial Max stores its records in the browser's local storage on the device. Use **System → Export backup** regularly. Never put M-Pesa PINs, bank passwords, card PINs, or other secrets into the app.
 
-## Planned maximum architecture
-Accounts, vaults, budgets, goals, investments, quests, achievements, streaks, alerts, analytics, authentication, cloud sync and financial intelligence.
+## Included
 
-Never store M-Pesa PINs, bank passwords, card PINs or other authentication secrets in the app database.
+- Command Center dashboard
+- Income and expense tracking
+- Categories and activity filters
+- Accounts
+- Savings goals / vault-style targets
+- Investment account tracking
+- XP and levels
+- Quests and achievements
+- Financial health indicators
+- Compound growth calculator
+- Financial intelligence based on recorded data
+- JSON backup and restore
+- Dark/light mode
+- Offline cache / installable PWA

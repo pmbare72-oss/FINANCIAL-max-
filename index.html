@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090d14">
+  <meta name="description" content="Financial Max — your personal money command center.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.svg" type="image/svg+xml">
+  <title>Financial Max 🐉</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="toast"></div>
+
+<header class="topbar">
+  <div class="brand"><div class="dragon">🐉</div><div><b>FINANCIAL MAX</b><span>Your Money Command Center</span></div></div>
+  <button class="iconbtn" id="themeBtn" title="Toggle theme">☀️</button>
+</header>
+
+<main class="app">
+  <section id="home" class="screen active">
+    <div class="hero card">
+      <div>
+        <span class="eyebrow">CURRENT LEVEL</span>
+        <h1 id="levelName">Awakening</h1>
+        <p id="levelLine">Level 1 · 0 XP</p>
+      </div>
+      <div class="level-ring"><span id="levelNum">1</span></div>
+      <div class="xpbar"><i id="xpFill"></i></div>
+    </div>
+
+    <div class="balance card">
+      <span class="muted">NET BALANCE</span>
+      <div class="bigmoney" id="balance">KSh 0</div>
+      <div class="quickstats">
+        <div><span>Income</span><b id="monthIncome">KSh 0</b></div>
+        <div><span>Expenses</span><b id="monthExpense">KSh 0</b></div>
+        <div><span>Saved</span><b id="monthSaved">KSh 0</b></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <button class="action incomeAction" data-add="income">＋ Income</button>
+      <button class="action expenseAction" data-add="expense">－ Expense</button>
+    </div>
+
+    <div class="sectionhead"><h2>Financial Health</h2><span id="healthScore">0/100</span></div>
+    <div class="card health">
+      <div class="healthrow"><span>Saving rate</span><b id="savingRate">0%</b></div>
+      <div class="meter"><i id="savingMeter"></i></div>
+      <div class="healthrow"><span>Budget control</span><b id="budgetHealth">0%</b></div>
+      <div class="meter"><i id="budgetMeter"></i></div>
+    </div>
+
+    <div class="sectionhead"><h2>Recent Activity</h2><button class="textbtn" data-tab="activity">View all</button></div>
+    <div id="recentList" class="list"></div>
+  </section>
+
+  <section id="activity" class="screen">
+    <div class="sectionhead"><h2>Transactions</h2><button class="primary" data-add="income">＋ Add</button></div>
+    <div class="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="income">Income</button>
+      <button class="chip" data-filter="expense">Expenses</button>
+    </div>
+    <div id="transactionList" class="list"></div>
+  </section>
+
+  <section id="money" class="screen">
+    <div class="sectionhead"><h2>Money System</h2></div>
+    <div class="cards3">
+      <div class="mini card"><span>Cash & Accounts</span><b id="accountTotal">KSh 0</b></div>
+      <div class="mini card"><span>Savings</span><b id="savingsTotal">KSh 0</b></div>
+      <div class="mini card"><span>Investments</span><b id="investTotal">KSh 0</b></div>
+    </div>
+    <div class="sectionhead"><h2>Accounts</h2><button class="primary" id="addAccount">＋ Account</button></div>
+    <div id="accountList" class="list"></div>
+    <div class="sectionhead"><h2>Goals & Vaults</h2><button class="primary" id="addGoal">＋ Goal</button></div>
+    <div id="goalList" class="list"></div>
+  </section>
+
+  <section id="growth" class="screen">
+    <div class="sectionhead"><h2>Growth Lab</h2></div>
+    <div class="card calculator">
+      <h3>Compound Growth Calculator</h3>
+      <div class="formgrid">
+        <label>Starting amount<input id="calcP" type="number" value="1000"></label>
+        <label>Monthly contribution<input id="calcC" type="number" value="1000"></label>
+        <label>Annual return %<input id="calcR" type="number" value="8" step="0.1"></label>
+        <label>Years<input id="calcY" type="number" value="5"></label>
+      </div>
+      <button class="primary wide" id="calculate">Calculate</button>
+      <div class="result" id="calcResult">KSh 0</div>
+    </div>
+    <div class="card insight">
+      <span class="eyebrow">FINANCIAL INTELLIGENCE</span>
+      <h3 id="insightTitle">Start recording your money</h3>
+      <p id="insightText">Once you add transactions, Financial Max will explain your cash flow, saving rate and spending patterns using your recorded data.</p>
+    </div>
+  </section>
+
+  <section id="quests" class="screen">
+    <div class="sectionhead"><h2>Quests & Achievements</h2></div>
+    <div class="card questhero"><span class="eyebrow">TODAY'S MISSION</span><h2 id="dailyQuest">Record today's money activity</h2><p>Consistency earns XP. Small actions compound.</p></div>
+    <div id="achievementList" class="achievements"></div>
+  </section>
+
+  <section id="settings" class="screen">
+    <div class="sectionhead"><h2>System</h2></div>
+    <div class="card settings">
+      <button id="exportBtn">📦 Export backup (JSON)</button>
+      <label class="importBtn">📥 Import backup<input id="importInput" type="file" accept=".json" hidden></label>
+      <button id="demoBtn">✨ Load demo data</button>
+      <button class="danger" id="resetBtn">♻️ Reset Financial Max</button>
+      <hr>
+      <h3>Privacy</h3>
+      <p class="muted">Your records are stored locally on this device. Financial Max does not need your M-Pesa PIN, bank password, card PIN or other secrets.</p>
+      <p class="muted small">Tip: export a backup regularly if the data matters to you.</p>
+    </div>
+    <div class="card">
+      <span class="eyebrow">FINANCIAL MAX</span>
+      <h2>Earn → Track → Protect → Save → Grow → Multiply</h2>
+      <p class="muted">Built as a lightweight installable app so it stays simple to use.</p>
+    </div>
+  </section>
+</main>
+
+<nav class="bottomnav">
+  <button class="nav active" data-tab="home">⌂<span>Home</span></button>
+  <button class="nav" data-tab="activity">↕<span>Activity</span></button>
+  <button class="nav" data-tab="money">▣<span>Money</span></button>
+  <button class="nav" data-tab="growth">↗<span>Growth</span></button>
+  <button class="nav" data-tab="quests">⚡<span>Quests</span></button>
+  <button class="nav" data-tab="settings">⚙<span>System</span></button>
+</nav>
+
+<div class="modal" id="modal">
+  <div class="modalbox">
+    <button class="close" id="closeModal">×</button>
+    <h2 id="modalTitle">Add Income</h2>
+    <form id="entryForm">
+      <input type="hidden" id="entryType">
+      <label>Amount (KSh)<input id="entryAmount" type="number" min="1" required placeholder="e.g. 500"></label>
+      <label>Description<input id="entryDesc" required placeholder="e.g. Barber work"></label>
+      <label>Category<select id="entryCategory"></select></label>
+      <label>Date<input id="entryDate" type="date" required></label>
+      <button class="primary wide" type="submit">Save transaction</button>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
